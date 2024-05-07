@@ -35,3 +35,4 @@
 .register-container .register-btn:active {
   background-color: #0052FF;
 }
+

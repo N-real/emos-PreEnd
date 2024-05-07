@@ -54,6 +54,9 @@
 									uni.setStorageSync("permission",permission)
 									console.log(permission)
 									// 跳转至index
+									uni.switchTab({
+										url:"../index/index"
+									})
 								})
 							}
 						});

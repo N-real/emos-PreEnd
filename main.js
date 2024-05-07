@@ -14,7 +14,7 @@ let baseUrl = "http://localhost:9527/api"
 
 Vue.prototype.url = {
 	register: baseUrl + "/user/register",
-	loingin: baseUrl + "/user/login"
+	login: baseUrl + "/user/login"
 }
 
 Vue.prototype.ajax = function(url,method,data,fun){
@@ -43,7 +43,7 @@ Vue.prototype.ajax = function(url,method,data,fun){
 					titile: resp.data
 				})
 			}
-		}
+		},
 	})
 }
 

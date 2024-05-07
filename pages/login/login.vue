@@ -34,6 +34,9 @@
 							let permission = resp.data.permission
 							uni.setStorageSync("permission",permission)
 							// 跳转至index
+							uni.switchTab({
+								url:"../index/index"
+							})
 						})
 					},
 					fail:function(e){
