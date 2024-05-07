@@ -13,16 +13,31 @@
 	export default {
 		data() {
 			return {
-				
-			}
+				registerCode:""
+			};
 		},
 		methods: {
 			register: function(){
+				let that = this // that为vue对象，如果在回调函数中的this则为回调函数的对象
+				if(that.registerCode==null || that.registerCode.length==0){
+					uni.showToast({
+						icon: "none",
+						title: "邀请码不能为空"
+					})
+					return 
+				}
+				else if(/^[0-9]{6}$/.test(that.registerCode)==false){
+					uni.showToast({
+						icon:"none",
+						title:"邀请码必须是6位数字"
+					})
+					return
+				}
 				uni.login({
 					provider: 'weixin',
 					success: function(resp){
 						console.log(resp.code)
-						let code = resp.code;
+						let code = resp.code; // 临时授权字符串
 						uni.getUserInfo({
 							provider: 'weixin',
 							success: function(resp){
@@ -34,10 +49,16 @@
 									photo:avatarUrl,
 									registerCode:that.registerCode
 								}
+								that.ajax(that.url.register,"POST",data,function(resp){
+									let permission = resp.data.permission
+									uni.setStorageSync("permission",permission)
+									console.log(permission)
+									// 跳转至index
+								})
 							}
-						})
+						});
 					}
-				})
+				});
 			}
 		}
 	}

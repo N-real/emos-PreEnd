@@ -23,6 +23,26 @@
 				uni.navigateTo({
 					url:"../register/register"
 				})
+			},
+			login:function(){
+				let that = this
+				uni.login({
+					provider:"weixin",
+					success:function(resp){
+						let code = resp.code
+						that.ajax(that.url.login,"POST",{"code":code},function(resp){
+							let permission = resp.data.permission
+							uni.setStorageSync("permission",permission)
+							// 跳转至index
+						})
+					},
+					fail:function(e){
+						uni.showToast({
+							icon:"none",
+							title:"执行异常"
+						})
+					}
+				})
 			}
 		}
 	}
